@@ -1,0 +1,4 @@
+[nodos]
+172.22.4.44 ansible_become_pass="usuario"
+
+
