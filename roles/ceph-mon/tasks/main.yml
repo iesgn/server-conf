@@ -1,0 +1,32 @@
+- name: ensure ceph ad ceph-mon packages are installed
+  apt: name={{ item }} state=latest
+  with_items:
+    - ceph
+    - ceph-mon
+
+- name: verify if ceph.conf file exists
+  stat:
+    path: /etc/ceph/ceph.conf
+  register: stat_result
+
+- name: verify if fsid is defined
+  command: egrep ^fsid\ =\ [a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12} /etc/ceph/ceph.conf
+  when: stat_result.stat.exists == True
+  register: result
+  ignore_errors: True
+
+- name: obtain UUID number from system when fsid is not defined
+  command: cat /proc/sys/kernel/random/uuid
+  when: result|failed
+  register: uuid
+
+- name: ensure ceph config file is present
+  template: >-
+    src=etc/ceph/ceph.conf
+    dest=/etc/ceph/ceph.conf
+    owner=root
+    group=root
+    mode=0644
+  when: result|failed
+
+  

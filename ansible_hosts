@@ -1,4 +1,14 @@
 [nodos]
-172.22.4.44 ansible_become_pass="usuario"
+vicar ansible_ssh_host=172.22.120.1 ansible_become_pass="usuario"
+gador ansible_ssh_host=172.22.120.2 ansible_become_pass="usuario"
+terque ansible_ssh_host=172.22.120.3 ansible_become_pass="usuario"
+laujar ansible_ssh_host=172.22.120.4 ansible_become_pass="usuario"
+
+[monitor]
+vicar ansible_ssh_host=172.22.120.1 ansible_become_pass="usuario"
+gador ansible_ssh_host=172.22.120.2 ansible_become_pass="usuario"
+terque ansible_ssh_host=172.22.120.3 ansible_become_pass="usuario"
+
+
 
 

@@ -1,6 +1,9 @@
 ---
 
-- hosts: all
-  roles:
-    - role: common
+# - hosts: all
+#   roles:
+#     - role: common
 
+- hosts: vicar
+  roles:
+    - role: ceph-mon
